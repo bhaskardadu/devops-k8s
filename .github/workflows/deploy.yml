@@ -36,3 +36,5 @@ jobs:
           export KUBECONFIG=$PWD/kubeconfig.yaml
           kubectl get nodes
           kubectl apply -f k8s/
+          kubectl set image deployment/devops-app devops-container=${{ secrets.DOCKER_USERNAME }}/devops-app:latest
+
