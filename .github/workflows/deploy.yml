@@ -30,7 +30,9 @@ jobs:
         uses: azure/setup-kubectl@v3
 
       - name: Deploy to k3s
+        shell: bash
         run: |
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > kubeconfig.yaml
+          export KUBECONFIG=$PWD/kubeconfig.yaml
+          kubectl get nodes
           kubectl apply -f k8s/
